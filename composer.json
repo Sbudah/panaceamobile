@@ -25,12 +25,12 @@
     },
     "autoload": {
         "psr-4": {
-            "sbudah\\PanaceaMobile\\": "src"
+            "NotificationChannels\\PanaceaMobile\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "sbudah\\PanaceaMobile\\Test\\": "tests"
+            "NotificationChannels\\PanaceaMobile\\Test\\": "tests"
         }
     },
     "config": {
