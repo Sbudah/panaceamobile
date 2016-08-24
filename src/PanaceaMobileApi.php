@@ -1,17 +1,17 @@
 <?php
 
-namespace NotificationChannels\SmscRu;
+namespace NotificationChannels\PanaceaMobile;
 
 use DomainException;
 use GuzzleHttp\Client as HttpClient;
-use NotificationChannels\SmscRu\Exceptions\CouldNotSendNotification;
+use NotificationChannels\PanaceaMobile\Exceptions\CouldNotSendNotification;
 
-class SmscRuApi
+class PanaceaMobileApi
 {
     const FORMAT_JSON = 3;
 
     /** @var string */
-    protected $apiUrl = 'https://smsc.ru/sys/send.php';
+    protected $apiUrl = 'https://api.panaceamobile.com/json/3';
 
     /** @var HttpClient */
     protected $httpClient;
@@ -48,15 +48,20 @@ class SmscRuApi
     public function send($recipient, $params)
     {
         $params = array_merge([
-            'phones' => $recipient,
-            'login'  => $this->login,
-            'psw'    => $this->secret,
-            'sender' => $this->sender,
-            'fmt'    => self::FORMAT_JSON,
+			'action' 	=> 'message_send',
+            'username'  => $this->login,
+            'password'  => $this->secret,
+            'from' 		=> $this->sender,
+            'to' 		=> $recipient,
         ], $params);
 
         try {
-            $response = $this->httpClient->post($this->apiUrl, ['form_params' => $params]);
+            $response = $this->httpClient->get(
+			$this->apiUrl, 
+				[
+					'query' => $params
+				]
+			);
 
             $response = json_decode((string) $response->getBody(), true);
 

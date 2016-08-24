@@ -1,10 +1,10 @@
 <?php
 
-namespace NotificationChannels\SmscRu;
+namespace NotificationChannels\PanaceaMobile;
 
 use Illuminate\Contracts\Support\Arrayable;
 
-class SmscRuMessage implements Arrayable
+class PanaceaMobileMessage implements Arrayable
 {
     /**
      * The phone number the message should be sent from.
@@ -24,7 +24,6 @@ class SmscRuMessage implements Arrayable
      * Create a new message instance.
      *
      * @param  string $content
-     *
      * @return static
      */
     public static function create($content = '')
@@ -55,7 +54,7 @@ class SmscRuMessage implements Arrayable
     }
 
     /**
-     * Set the phone number or sender name the message should be sent from.
+     * Set the phone number or from name the message should be sent from.
      *
      * @param  string  $from
      *
@@ -67,6 +66,20 @@ class SmscRuMessage implements Arrayable
 
         return $this;
     }
+	
+    /**
+     * Set the phone number or from name the message should be sent from.
+     *
+     * @param  string  $from
+     *
+     * @return $this
+     */
+    public function recipient($to)
+    {
+        $this->to = $to;
+
+        return $this;
+    }
 
     /**
      * @return array
@@ -74,12 +87,12 @@ class SmscRuMessage implements Arrayable
     public function toArray()
     {
         $params = [
+            'mes' => $this->content,
             'charset' => 'utf-8',
-            'mes'     => $this->content,
         ];
 
         if (! empty($this->from)) {
-            $params = array_merge($params, ['sender' => $this->from]);
+            $params = array_merge($params, ['from' => $this->from]);
         }
 
         return $params;
