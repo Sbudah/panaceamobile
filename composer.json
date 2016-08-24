@@ -1,37 +1,36 @@
 {
-    "name": "laravel-notification-channels/smsc-ru",
-    "description": "SmscRu Notifications driver.",
-    "keywords": ["laravel", "notifications", "smscentre", "smsc", "СМС-Центр"],
-    "homepage": "https://github.com/laravel-notification-channels/smsc-ru",
+    "name": "sbudah/panaceamobile",
+    "description": "PanaceaMobile Notifications driver.",
+    "keywords": ["laravel", "notifications", "smscentre", "smsc"],
+    "homepage": "https://github.com/sbudah/panaceamobile",
     "license": "MIT",
     "authors": [
         {
-            "name": "JhaoDa",
+            "name": "Sibusiso Mbuli",
             "role": "Developer",
-            "email": "jhaoda@gmail.com"
+            "email": "sibusiso@mbu.li"
         }
     ],
     "require": {
         "php": ">=5.6.4",
         "guzzlehttp/guzzle": "~6.0",
-        "illuminate/queue": "^5.3@dev",
         "illuminate/events": "^5.3@dev",
-        "illuminate/support": "^5.3@dev",
-        "illuminate/notifications": "^5.3@dev"
+        "illuminate/notifications": "^5.3@dev",
+        "illuminate/queue": "^5.3@dev",
+        "illuminate/support": "^5.3@dev"
     },
     "require-dev": {
-        "mockery/mockery": "~0.9",
-        "phpunit/phpunit": "~4.8|~5",
-        "orchestra/testbench": "~3.0"
+        "phpunit/phpunit": "~4",
+        "mockery/mockery": "~0.9"
     },
     "autoload": {
         "psr-4": {
-            "NotificationChannels\\SmscRu\\": "src"
+            "sbudah\\PanaceaMobile\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "NotificationChannels\\SmscRu\\Test\\": "tests"
+            "sbudah\\PanaceaMobile\\Test\\": "tests"
         }
     },
     "config": {

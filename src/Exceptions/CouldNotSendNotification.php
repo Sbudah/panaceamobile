@@ -1,6 +1,6 @@
 <?php
 
-namespace NotificationChannels\SmscRu\Exceptions;
+namespace NotificationChannels\PanaceaMobile\Exceptions;
 
 use Exception;
 use DomainException;
