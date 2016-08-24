@@ -3,8 +3,6 @@
 namespace NotificationChannels\PanaceaMobile;
 
 use Illuminate\Notifications\Notification;
-use NotificationChannels\PanaceaMobile\Events\SendingMessage;
-use NotificationChannels\PanaceaMobile\Events\MessageWasSent;
 
 class PanaceaMobileChannel
 {
@@ -26,9 +24,6 @@ class PanaceaMobileChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        if (! $this->shouldSendMessage($notifiable, $notification)) {
-            return;
-        }
 
         if (! $to = $notifiable->routeNotificationFor('panaceamobile')) {
             return;
@@ -41,20 +36,5 @@ class PanaceaMobileChannel
         }
 
         $this->panacea->send($to, $message->toArray());
-
-        event(new MessageWasSent($notifiable, $notification));
-    }
-
-    /**
-     * Check if we can send the notification.
-     *
-     * @param      $notifiable
-     * @param \Illuminate\Notifications\Notification $notification
-     *
-     * @return bool
-     */
-    protected function shouldSendMessage($notifiable, Notification $notification)
-    {
-        return event(new SendingMessage($notifiable, $notification), [], true) !== false;
     }
 }

@@ -87,7 +87,7 @@ class PanaceaMobileMessage implements Arrayable
     public function toArray()
     {
         $params = [
-            'mes' => $this->content,
+            'text' => $this->content,
             'charset' => 'utf-8',
         ];
 

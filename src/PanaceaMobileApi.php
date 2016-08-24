@@ -54,19 +54,20 @@ class PanaceaMobileApi
             'from' 		=> $this->sender,
             'to' 		=> $recipient,
         ], $params);
-
+		
+		
         try {
-            $response = $this->httpClient->get(
+            $request = $this->httpClient->get(
 			$this->apiUrl, 
 				[
 					'query' => $params
 				]
 			);
+			
+            $response = json_decode($request->getBody(), true);
 
-            $response = json_decode((string) $response->getBody(), true);
-
-            if (isset($response['error'])) {
-                throw new DomainException($response['error'], $response['error_code']);
+            if ( ! isset($response['status']) || $response['status'] != 1) {
+                throw new DomainException($response['message'], $response['status']);
             }
 
             return $response;
